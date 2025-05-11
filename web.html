@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asif Ahamad | Cosmic Developer</title>
+    <style>
+        :root {
+            --space-black: #0B0C10;
+            --nebula-purple: #6C31E0;
+            --starlight-blue: #66FCF1;
+            --dark-matter: #1F2833;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--space-black);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+        }
+
+        #star-container {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes galaxy-pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, white);
+            animation: shoot 3s infinite;
+        }
+
+        .header-content {
+            text-align: center;
+            padding: 5rem 2rem;
+            position: relative;
+            background: linear-gradient(45deg, var(--nebula-purple), transparent);
+        }
+
+        .name-header {
+            font-size: 4rem;
+            background: linear-gradient(45deg, var(--starlight-blue), var(--nebula-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: galaxy-pulse 4s infinite;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .project-card {
+            background: var(--dark-matter);
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border: 1px solid var(--nebula-purple);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .nav-button {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            padding: 1rem 2rem;
+            background: var(--nebula-purple);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes shoot {
+            0% { transform: translateX(-100%) translateY(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100vw) translateY(100vh); opacity: 0; }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div id="star-container"></div>
+    
+    <button class="nav-button">Home</button>
+
+    <header class="header-content">
+        <h1 class="name-header">ASIF AHAMAD</h1>
+        <h2>PROFESSIONAL WEB DEVELOPER</h2>
+        <div class="shooting-star" style="top: 20%; left: 10%"></div>
+        <div class="shooting-star" style="top: 70%; left: 30%"></div>
+    </header>
+
+    <section class="portfolio-section">
+        <div class="portfolio-grid">
+            <div class="project-card">
+                <h3>Zomato Clone</h3>
+                <p>Full-stack food delivery platform replica with real-time ordering system</p>
+                <a href="#">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>Amazon Clone</h3>
+                <p>E-commerce platform with secure payment gateway integration</p>
+                <a href="#">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>W3Schools Clone</h3>
+                <p>Interactive coding education platform with live code editor</p>
+                <a href="#">View Project</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Generate dynamic stars
+        function createStars() {
+            const container = document.getElementById('star-container');
+            for(let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                star.style.setProperty('--duration', `${2 + Math.random() * 3}s`);
+                container.appendChild(star);
+            }
+        }
+
+        // Shooting star generator
+        setInterval(() => {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 3000);
+        }, 5000);
+
+        createStars();
+    </script>
+</body>
+</html>
